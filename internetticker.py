@@ -52,7 +52,7 @@ class displayPrintingThread (threading.Thread):
       self.threadID = threadID
       self.name = name
    def run(self):
-      print_time(self, .25)
+      print_time(self, .05)
 
 def print_time(self, delay):
    while 1:
