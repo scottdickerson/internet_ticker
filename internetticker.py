@@ -80,8 +80,11 @@ def print_time(self, delay):
       global cursorPosition
       if 'activeSource' in globals():
         if args.lcd:
-          lcd.lcd_display_string(layoutString,1)
-          lcd.lcd_display_string(activeSource,1)
+          if len(activeSource) < displayWidth:
+            title = activeSource + layoutString[0:displayWidth-len(activeSource)]
+          else:
+            title = activeSource
+          lcd.lcd_display_string(title,1)
         else:
           print(activeSource)
         if cursorPosition < len(activeFeed):
