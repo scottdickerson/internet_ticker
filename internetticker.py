@@ -73,6 +73,7 @@ def print_time(self, delay):
       global cursorPosition
       if 'activeSource' in globals():
         if args.lcd:
+          lcd.lcd_display_string(layoutString,1)
           lcd.lcd_display_string(activeSource,1)
         else:
           print(activeSource)
