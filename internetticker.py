@@ -3,6 +3,7 @@ import threading
 import time
 import datetime
 import argparse
+import string
 import googletrends
 import twittertrends
 
@@ -23,6 +24,10 @@ layoutString = " " * displayWidth
 exitFlag = 0
 cursorPosition = 0
 trendProviders = [twittertrends.getWorldwideTrends, googletrends.getTrends, twittertrends.getLocalTrends]
+
+def isEnglish(s):
+    newString = s.encode("ascii", errors="ignore").decode()
+    return len(newString) == len(s)
 
 class feedReaderThread (threading.Thread):
    def __init__(self, threadID, name):
@@ -47,10 +52,12 @@ def read_feed(self, delay):
       feedPublished = datetime.datetime.now().time().isoformat().split(".")[0]
       cursorPosition = 0
       for idx, entry in enumerate(trends.trends):
-        if idx != len(trends.trends) - 1:
-          activeFeed += entry + " | "
-        else:
-          activeFeed += layoutString
+        # Remove any non-english strings from worldwide since the LCD display can't display them
+        if isEnglish(entry):
+          if idx != len(trends.trends) - 1:
+            activeFeed += entry + " | "
+          else:
+            activeFeed += layoutString
       time.sleep(delay)
       if self.rssIndex >= len(trendProviders) - 1:
         self.rssIndex = 0
