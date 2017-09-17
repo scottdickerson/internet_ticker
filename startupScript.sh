@@ -33,5 +33,5 @@ fi
 
 # Now we enter our normal code here. The above was just for online checking
 cd /home/pi/display
-python3 internetticker.py
+python3 internetticker.py --lcd
 cd /
