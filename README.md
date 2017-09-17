@@ -8,5 +8,7 @@ Install the RSS feedparser python library from here:
 https://pypi.python.org/pypi/feedparser#downloads
 Internet Ticker with trends for Raspberry Pi
 
+python3 -m pip install geocoder tweepy
+
 To run: 
 python3 internetticker.py
